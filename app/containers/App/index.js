@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/index';
+import GameType from 'containers/GameType/index';
 import NotFoundPage from 'containers/NotFoundPage/index';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -20,6 +21,7 @@ export default function App() {
       <Header />
       <Switch>
       	<Route exact path="/" component={HomePage} />
+        <Route exact path="/gametype" component={GameType} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />

@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 
-const getUserName = (state) => {
-	console.log(state);
-	return function () {
-		
-	}
-};
+const selectUserinfo = (state) => state.get('userInfo');
+
+const getUserName = () => createSelector(
+  selectUserinfo,
+  (_) => _.get('userName')
+);
 
 export {
   getUserName

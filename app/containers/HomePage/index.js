@@ -26,7 +26,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
   render() {
     const { updateUserName, userName } = this.props;
-
+    console.log(userName);
     return (
       <div>
         <img className="user-image" src={defaultUserImage} alt="User image" />
