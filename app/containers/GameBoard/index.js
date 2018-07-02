@@ -19,16 +19,122 @@ import saga from './saga';
 import './style.scss';
 
 export class GameBoard extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(){
+    super();
+    this.green = {
+      initialPoint : 10,
+      homeStartingPoint : 201  
+    },
+    this.yellow = {
+      initialPoint : 49,
+      homeStartingPoint : 101  
+    },
+    this.blue = {
+      initialPoint : 36,
+      homeStartingPoint : 301  
+    },
+    this.red = {
+      initialPoint : 23,
+      homeStartingPoint : 401
+    }
+
+
+    this.state = {
+      current_number : null,
+      players : [{
+       position : [null,null,null,null],
+       color : "red"
+      },{
+       position : [null,null,null,null],
+       color : "green"
+      }],
+      current_player : null
+    }
+
+    this.throwADice = this.throwADice.bind(this);
+  }
+
+  rollADice(){
+    return Math.floor(((6)*Math.random())+1)
+  }
+
+  getCurrentPlayer(){
+    let current_player;
+
+    if(this.state.current_player === null){
+      current_player = 0;
+    }
+
+    if(this.state.current_player != null){
+      if(this.state.current_player < this.state.players.length-1){
+        current_player = this.state.current_player+1;
+      }else{
+        current_player = 0;
+      }
+    }
+
+    return current_player;
+  }
+
+  PlayAToken(currentPlayer, currentNumber){
+    let NotAllNull = this.state.players[currentPlayer].position.some((item) => item!=null);
+    if(NotAllNull){
+      if(currentNumber === 6){
+        //Highlighten all of the Tokens
+        this[this.state.players[currentPlayer].color+"1"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"2"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"3"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"4"].style.border = "3px dotted #000";
+        debugger;
+      }else{
+        //Highlighten all open Tokens
+      }
+    }else{
+
+      if(currentNumber === 6){
+        //Highlighten all of the Tokens
+        this[this.state.players[currentPlayer].color+"1"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"2"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"3"].style.border = "3px dotted #000";
+        this[this.state.players[currentPlayer].color+"4"].style.border = "3px dotted #000";
+
+        // document.getElementById('23').offsetTop;
+        // document.getElementById('23').offsetLeft;
+        // this[this.state.players[currentPlayer].color+"1"].style.left = "385px";
+        // this[this.state.players[currentPlayer].color+"1"].style.top = "385px";
+        // this[this.state.players[currentPlayer].color+"1"].style.width = "6vmin";
+        // this[this.state.players[currentPlayer].color+"1"].style.height = "6vmin";
+      }
+    }
+  }
+
+  throwADice(){
+    let currentPlayer = this.getCurrentPlayer();
+    let currentNumber = this.rollADice();
+
+    this.PlayAToken(currentPlayer,currentNumber);
+
+    this.setState({
+      current_player : currentPlayer,
+      current_number : currentNumber
+    })
+  }
+
   render() {
       return (
         <div id="ludo-board-wrapper">
+          <div className="action-board">
+            <div className="roll-it" onClick={this.throwADice}>Roll It</div>
+            <div className="current-player">Player : {this.state.current_player}</div>
+            <div className="current-number">Numer : {this.state.current_number}</div>
+          </div>
           <div id="main">
             <div id="nw">
               <div className="panelStyle">
-                <div id="gre-4" ><div>4</div></div>
-                <div id="gre-3" ><div>3</div></div>
-                <div id="gre-2" ><div>2</div></div>
-                <div id="gre-1" ><div>1</div></div>
+                <div><div ref={(x) => {this.green4 = x}}>4</div></div>
+                <div ref={this.gre-3}><div>3</div></div>
+                <div ref={this.gre-2}><div>2</div></div>
+                <div ref={this.gre-1}><div>1</div></div>
               </div>
             </div>
 
@@ -55,10 +161,10 @@ export class GameBoard extends React.Component { // eslint-disable-line react/pr
 
             <div id="ne">
               <div className="panelStyle">
-                <div id="yel-4" ><div>4</div></div>
-                <div id="yel-3" ><div>3</div></div>
-                <div id="yel-2" ><div>2</div></div>
-                <div id="yel-1" ><div>1</div></div>
+                <div ref={this.yel-4}><div>4</div></div>
+                <div ref={this.yel-3}><div>3</div></div>
+                <div ref={this.yel-2}><div>2</div></div>
+                <div ref={this.yel-1}><div>1</div></div>
               </div>
             </div>
 
@@ -125,10 +231,10 @@ export class GameBoard extends React.Component { // eslint-disable-line react/pr
 
             <div id="sw">   
               <div className="panelStyle">
-                <div id="red-4" ><div>4</div></div>
-                <div id="red-3" ><div>3</div></div>
-                <div id="red-2"  ><div>2</div></div>
-                <div id="red-1" ><div>1</div></div>
+                <div><div ref={(x) => {this.red4 = x}}>4</div></div>
+                <div><div ref={(x) => {this.red3 = x}}>3</div></div>
+                <div><div ref={(x) => {this.red2 = x}}>2</div></div>
+                <div><div ref={(x) => {this.red1 = x}}>1</div></div>
               </div>
             </div>
 
@@ -155,10 +261,10 @@ export class GameBoard extends React.Component { // eslint-disable-line react/pr
 
             <div id="se">
               <div className="panelStyle">
-                <div id="blu-4" ><div>4</div></div>
-                <div id="blu-3" ><div>3</div></div>
-                <div id="blu-2" ><div>2</div></div>
-                <div id="blu-1" ><div>1</div></div>
+                <div ref={this.blu-4}><div>4</div></div>
+                <div ref={this.blu-3}><div>3</div></div>
+                <div ref={this.blu-2}><div>2</div></div>
+                <div ref={this.blu-1}><div>1</div></div>
               </div>
             </div>
           </div>

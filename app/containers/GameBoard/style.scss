@@ -293,3 +293,24 @@ box-sizing: border-box;
   width:36vmin;
   background-color:white;
 }
+
+/*Action board*/
+.action-board{
+  position: absolute;
+  left: 10px;
+  .roll-it{
+    display: inline-block;
+    padding:6px 15px;
+    border:1px solid #ccc;
+    cursor: pointer;
+    &:hover{
+      background-color:#ccc;
+    }
+  }
+  .current-number{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}
