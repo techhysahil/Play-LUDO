@@ -29,9 +29,71 @@ $primary-color-4: #DA251C;
   width:6vmin;
   height:6vmin;
   position: static;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(0,0,0,0.09);
 }
+
+/*Arrows on the board*/
+#bottom .a:nth-child(7):after{
+    content: "";
+    background-image: url(./arrow.png);
+    width: 12vmin;
+    height: 6vmin;
+    position: relative;
+    display: block;
+    z-index: 999;
+    background-size: 100% 100%;
+    transform: rotate(90deg);
+    background-position: 0px 0px;
+    left: -50%;
+    top: -10%;
+}
+
+#top .a:nth-child(12):after{
+    content: "";
+    background-image: url(./arrow.png);
+    width: 12vmin;
+    height: 6vmin;
+    position: relative;
+    display: block;
+    z-index: 999;
+    background-size: 100% 100%;
+    transform: rotate(-90deg);
+    background-position: 0px 0px;
+    left: -50%;
+    top: 0%;
+}
+
+#left > div:first-child .a:nth-child(4):after{
+    content: "";
+    background-image: url(./arrow.png);
+    width: 12vmin;
+    height: 6vmin;
+    position: relative;
+    display: block;
+    z-index: 999;
+    background-size: 100% 100%;
+    transform: rotate(180deg);
+    background-position: 0px 0px;
+    left: -50%;
+    top: -10%;
+}
+
+#right > div:last-child .a:nth-child(3):after{
+    content: "";
+    background-image: url(./arrow.png);
+    width: 12vmin;
+    height: 6vmin;
+    position: relative;
+    display: block;
+    z-index: 999;
+    background-size: 100% 100%;    
+    background-position: 0px 0px;
+    left: -65%;
+    top: -10%;
+}
+
+
 button{
   margin: 5px;
 }
